@@ -34,7 +34,7 @@ class TextAnalyzer:
         self.documents = open(documents_file, encoding="utf-8-sig").read().split("\n\n")
         self.documents = [
             x.replace("\n", " ").replace("...", "").replace("�", "").replace(".  ", ".")
-            for x in documents
+            for x in self.documents
         ]
 
         self.process_docs = [self.preprocess(x).lower() for x in self.documents]
