@@ -320,6 +320,7 @@ Original file is located at
 
 import sympy
 import math
+from hashlib import sha512
 
 public_key, private_key, n = 0, 0, 0
 
@@ -367,20 +368,19 @@ def decoder(message):
         decrypted.append(dec)
     return decrypted
 
-if __name__ == '__main__':
-    set_keys()
-    print('Keys - ', public_key, private_key)
-    message = 'Encrypt this'
-    print('Original Message - ', [ord(x) for x in message])
-    encrypt_text = encoder(message)
-    print('Encrypted Message - ', encrypt_text)
-    decrypt_text = decoder(encrypt_text)
-    print('Decrypted Message - ', decrypt_text)
 
+def sha_algo(text):
+  hash = sha512(text.encode('utf-8'))
+  print(text)
+  return hash.hexdigest()
 
-
-from hashlib import sha512
-text = 'Hello There!'
-hash = sha512(text.encode('utf-8'))
-print(text)
-print(hash.hexdigest())
+def RSA():
+  set_keys()
+  print('Keys - ', public_key, private_key)
+  message = 'Encrypt this'
+  print('Original Message - ', [ord(x) for x in message])
+  encrypt_text = encoder(message)
+  print('Encrypted Message - ', encrypt_text)
+  decrypt_text = decoder(encrypt_text)
+  print('Decrypted Message - ', decrypt_text)
+  print('Original Message - ', "".join([str(x) for x in message]))
